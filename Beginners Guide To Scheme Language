@@ -1,0 +1,167 @@
+#list operators 1) cons 2) cdr 3) car 4)list 5)quote
+
+#1)cons - it takes two args and join them/aka pairs
+
+#Q.lets create (1 . 2) pair
+(cons 1 2) 
+
+#Q.lets create (1 2 . 3) pair
+(cons 1 (cons 2 3))
+
+#Q.Define a function that returns a pair
+(define foo(cons 1 2))
+foo #calling foo function
+
+#2)car - it returns head value/first value
+
+#Q.get the head value of the pair
+(car foo) #it returns 1
+
+#)cdr - get the tail value
+
+#Q.get the second value of the pair
+(cdr foo) #it returns 2
+
+3)list
+
+#Q.create a list with (1,2,3) value
+(list 1 2 3)
+
+#using define function
+(define my_list '(2 7 9 '(3 7 4)))  
+
+#how to loop through the list ?
+    #we will make use of "car" and "cdr" operator
+
+4) quote : to make `(1 2 3) looks like a list not object
+#constants
+`(1 2 3) #this is a list #it's shorthand of
+(quote (1 2 3))
+
+
+
+#S-expression evaluation
+(+ 1 2)
+#operator + is applied to 1 and 2.
+(+ 1 2 3 4 5) #sum of all numbers
+
+#if statements are also functions
+#syntax:
+(if <cond>
+    <then st>
+    <else>
+)
+
+real code:
+(if (> x 0)
+    (/ 100 x)
+    0
+)
+
+
+
+#cond : cond function takes any number of inputs(s-exp).
+#cond is mainly used when we want to check multiple conditions.
+(cond ((> x 0) (/ 100 x))
+    ((= x 0) 0)
+    (else (* 100 x))
+)
+
+#if (> x 0) is true (/ 100 x) is executed. same goes for next line.
+
+
+#define : define function is used to define functions.
+(define (factorial x)
+    (if (= 1 x)
+        1
+        (factorial (x-1))
+    )
+)
+(display (factorial 10))
+
+
+#cons : takes two inputs 1)head of new list 2)tail of new list
+(cons `x `(a b))
+#it returns (x a b)
+#x = head
+#(a b) is a tail
+
+
+#lambda functions: takes two inputs 1)parameters 2)what we want to do
+
+(LAMBDA (L) (CAR (CAR L)))
+'((A B) C D)
+
+#(L) is a parameter
+#the entire opration is applied to '((A B) C D)
+
+#read code:
+(define cube (lambda (x) (* x x x))) 
+(display (cube 2))
+
+
+#map : takes multiple list and apply operation defined/give as first parameter
+
+(map + '(1 2 3)'(4 5 6))
+#we can add as many list as we want
+
+(define cube(lambda (x) (* x x)))
+(display (cube 10))
+
+(map   (lambda (a b) (list a b))    '(1 2 3)    '(4 5 6))
+((1 4) (2 5) (3 6))
+
+#Q.how to apply single function to the list
+(define cube(lambda (x) (* x x)))
+(display (map cube '(1 2 3)))
+
+#Note : mapcar function is used in LISP not in SCHEME
+
+#EVAL: take a list and convert it into s-expression
+======
+(eval '(+ 1 2 3))
+op : 6
+
+Ex : suppose we have a list of numbers that must be added together
+ 
+(DEFINE (adder lis)
+    (COND ((NULL? lis) 0)
+    (ELSE (EVAL (CONS + lis)))))
+
+#(CONS + lis) : cons make pairs of two args.lets say list contains (1 2 3) elements. pair of (+ (1 2 3)) is created.
+#internally we are building new list with + as head and (1 2 3) as tail of the list.
+
+#APPLY : apply operator to list
+===============================
+(APPLY + '(1 2 3 4))
+
+#mutating(mutating is not allowed by using these functions we are fighting the language)
+=========
+1) SET! - set value to the name
+2) SETCAR! - setting head value of the list
+3) SETCDR! - replaces the tail of the list with another list
+
+1) SET!
+(define x 3)
+(display x)
+
+Q.change the value of x
+(set! x 5)
+(display x)
+
+2) SETCAR!
+(define lis '(1 2 3))
+(set-car! lis 5) #read the syntax carefully
+(display lis)
+
+3) SETCDR!
+(define lis '(1 2 3 4))
+(set-cdr! lis 5)
+(display lis)
+op : (1 . 5) #whole tail is replaced by 5
+
+
+
+
+
+
